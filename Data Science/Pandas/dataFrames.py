@@ -179,7 +179,51 @@ dfConcatenados = pd.concat([df2, df4], axis='columns')
 # VERIFICA SE EXISTEM DADOS DUPLICADOS
 # Ocorrem dados duplicados quando uma linha inteira é igual a outra
 dadosDuplicados = dfConcatenados.duplicated().sum()
-print(dadosDuplicados)
+#print(dadosDuplicados)
+
+# Excluindo as linhas com dados duplicados mantendo a primeira ocorrência da linha
+# ignore_index=True faz com que índice seja reiniciado
+excluirDadosDuplicados = dfConcatenados.drop_duplicates(ignore_index=True, inplace=True)
+
+# Alterar o valor específico no dataframe
+df2['Quantidade'] = df2['Quantidade'].replace([16, 30], [5, 8])
+#print(df2)
+
+# Alterar valores de uma coluna baseada em uma condição
+df2.loc[(df2['Quantidade'] > 1) & (df2['Quantidade'] < 7), 'Quantidade'] = 99
+#print(df2) 
+
+# SALVAR O DATAFRAME EM UM ARQUIVO EXCEL. 
+# Obs. A pasta onde o arquivo for salvo deve existir.
+
+import os
+
+# gerando um arquivo Excel a partir de um Dataframe
+
+#try:
+#    df2.to_excel('teste-df2.xlsx', sheet_name='Planilha1')
+#    print('Arquivo Salvo!')
+#
+#except OSError as mensagemOSError: # Erro de entrada e saída
+#    print(mensagemOSError)
+
+# Cria um dataframe a partir de um arquivo excel
+#df5 = pd.read_excel('teste-df2.xlsx', sheet_name='Planilha1')
+#print(df5)
+
+# Gerando um arquivo CSV a partir de um dataframe
+#df2.to_csv('teste-df2.csv')
+#df6 = pd.read_csv('teste-df2.csv')
+#print(df6)
+
+# COLETANDO AMOSTRAS DE UM DATAFRAME
+amostra = df3.sample(n=3)
+#print(amostra)
+
+# Retorna uma fração específica do número total de linhas
+fracao = df3.sample(frac=0.5)
+print(fracao)
+
 
 
 
