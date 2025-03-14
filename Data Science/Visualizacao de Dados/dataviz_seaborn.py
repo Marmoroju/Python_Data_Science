@@ -2,26 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-
-# Verifica os datasets disponíveis. Exige conexão com a internet
-dataset = sns.get_dataset_names()
-#print(dataset)
-
-# Carrega um dataset (Método 01)
-#df = sns.load_dataset('tips')
-
-# Coleta de dados (Método 02)
-df = pd.read_csv('tips.csv')
-
-# Renomear as colunas
-df.columns = ["Total da Conta", "Valor da Gorjeta", "Sexo", "Fumante", "Dia", "Horário", "Quantidade de Pessoas"]
-
-
-# Agrupa os dados por DIA
-df1 = df.groupby(["Dia"])
-
-# Calcula a soma das variáveis de acordo com a variável "Dia" e reinicia o índice
-dfSoma = df1.sum(["Total da Conta", "Valor da Gorjeta", "Quantidade de Pessoas"]).reset_index()
+from dataviz_matplotlib import dfSoma, df
 
 # Define o tamanho do gráfico
 sns.set_theme(rc = {'figure.figsize':(10,6)})
@@ -103,16 +84,17 @@ for p in ax.patches:
 plt.show()'''
 
 # FACET
-'''sns.set_theme(style="darkgrid")
+sns.set_theme(style="darkgrid")
 ax = sns.FacetGrid(df, col="Dia", height=5, aspect=0.8)
 ax.map(sns.histplot, "Valor da Gorjeta")
-plt.show()'''
+plt.show()
 
 # FACET com gráficos de linhas de todas asvariáveis
-
+'''
 ax = sns.PairGrid(df)
 ax.map(sns.lineplot)
 plt.show()
+'''
 
 
 
